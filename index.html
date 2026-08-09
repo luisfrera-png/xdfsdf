@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uninet Básico | Finanzas de la finca familiar en Venezuela</title>
+<meta name="description" content="Uninet Básico es un portal educativo sobre finanzas de la finca familiar: organización del presupuesto, planificación de gastos entre cosechas y control de costos de producción para pequeños productores.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --oat:#F1ECDD;
+    --oat-deep:#E8E1CC;
+    --card:#FFFDF7;
+    --ink:#2B3626;
+    --ink-soft:#5B6350;
+    --olive:#48573C;
+    --gold:#B8843C;
+    --gold-deep:#9A6C2E;
+    --sky:#7C9386;
+    --line:#DAD2B8;
+    --radius:14px;
+    --max:1160px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--oat);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.logo{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    color:var(--ink);
+    margin:0;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px;}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+
+  /* Header */
+  header.site{
+    position:sticky;top:0;z-index:40;
+    background:rgba(241,236,221,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 0;
+  }
+  .logo{font-size:1.3rem;letter-spacing:0.01em;}
+  .logo span{color:var(--gold-deep);}
+  nav.main-nav{display:flex;align-items:center;gap:30px;}
+  nav.main-nav a{
+    font-size:0.95rem;font-weight:500;color:var(--ink-soft);
+    transition:color .2s ease;
+  }
+  nav.main-nav a:hover{color:var(--olive);}
+  .cta-btn{
+    background:var(--olive);color:#fff !important;
+    padding:10px 20px;border-radius:999px;
+    font-weight:600;font-size:0.9rem;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .cta-btn:hover{background:var(--gold-deep);transform:translateY(-1px);}
+  .nav-toggle{display:none;background:none;border:0;font-size:1.6rem;cursor:pointer;color:var(--ink);}
+
+  /* Hero */
+  .hero{padding:64px 0 40px;}
+  .hero-grid{
+    display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--gold-deep);margin-bottom:18px;
+  }
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--gold-deep);display:inline-block;}
+  h1.hero-title{
+    font-size:clamp(2.1rem, 4.2vw, 3.1rem);
+    line-height:1.12;letter-spacing:-0.01em;
+  }
+  h1.hero-title em{font-style:italic;color:var(--gold-deep);}
+  .hero-sub{
+    margin-top:20px;font-size:1.08rem;color:var(--ink-soft);max-width:46ch;
+  }
+  .hero-actions{margin-top:30px;display:flex;gap:16px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--gold-deep);color:#fff;padding:13px 26px;border-radius:999px;
+    font-weight:600;font-size:0.95rem;transition:transform .2s ease,box-shadow .2s ease;
+    box-shadow:0 6px 18px rgba(154,108,46,0.25);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(154,108,46,0.32);}
+  .btn-ghost{
+    padding:13px 22px;border-radius:999px;border:1.5px solid var(--line);
+    font-weight:600;font-size:0.95rem;color:var(--olive);
+  }
+  .author-chip{
+    margin-top:34px;display:flex;align-items:center;gap:12px;
+  }
+  .author-avatar{
+    width:44px;height:44px;border-radius:50%;
+    background:var(--olive);color:#fff;display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-weight:600;font-size:0.95rem;flex:none;
+  }
+  .author-meta{font-size:0.85rem;color:var(--ink-soft);}
+  .author-meta strong{display:block;color:var(--ink);font-size:0.92rem;}
+
+  /* Hero visual: seasonal cash-flow signature graphic */
+  .hero-visual{
+    background:var(--card);border:1px solid var(--line);border-radius:22px;
+    padding:26px 22px 20px;box-shadow:0 18px 40px rgba(43,54,38,0.08);
+  }
+  .hero-visual .cap{
+    display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;
+  }
+  .hero-visual .cap h3{font-size:1rem;}
+  .hero-visual .cap span{font-size:0.75rem;color:var(--ink-soft);}
+  .cycle-legend{display:flex;gap:18px;margin-top:14px;flex-wrap:wrap;}
+  .cycle-legend div{display:flex;align-items:center;gap:7px;font-size:0.8rem;color:var(--ink-soft);}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  .dot.gasto{background:var(--gold);}
+  .dot.ingreso{background:var(--olive);}
+
+  /* Section shells */
+  section{padding:56px 0;}
+  .section-head{max-width:640px;margin-bottom:38px;}
+  .section-head .eyebrow{margin-bottom:12px;}
+  h2.section-title{font-size:clamp(1.6rem,2.6vw,2.1rem);}
+  .section-head p{color:var(--ink-soft);margin-top:12px;}
+
+  /* Articles: "cuaderno de registro" list — no cards, no boxes */
+  .log{
+    border-top:1px solid var(--line);
+  }
+  .log-entry{
+    display:grid;
+    grid-template-columns:64px 1fr auto;
+    column-gap:28px;
+    align-items:start;
+    padding:30px 0;
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .log-entry::before{
+    content:"";
+    position:absolute;left:0;top:0;bottom:0;width:0;
+    background:var(--gold-deep);
+    transition:width .25s ease;
+  }
+  .log-entry:hover::before{width:3px;}
+  .log-num{
+    font-family:'Fraunces',serif;font-weight:400;font-size:1.7rem;
+    color:var(--line);line-height:1;padding-top:2px;
+    font-variant-numeric:tabular-nums;
+    transition:color .25s ease;
+  }
+  .log-entry:hover .log-num{color:var(--gold-deep);}
+  .log-body .badge{
+    display:inline-block;font-size:0.7rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
+    color:var(--olive);margin-bottom:10px;
+  }
+  .log-body .badge::after{content:"";display:inline-block;width:16px;height:1px;background:var(--line);margin-left:10px;vertical-align:middle;}
+  .log-body h3{
+    font-size:1.28rem;line-height:1.3;margin-bottom:10px;max-width:44ch;
+    transition:color .2s ease;
+  }
+  .log-entry:hover .log-body h3{color:var(--gold-deep);}
+  .log-body p.desc{color:var(--ink-soft);font-size:0.94rem;max-width:52ch;margin:0;}
+  .log-side{
+    text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:14px;
+    padding-top:2px;
+  }
+  .log-side .card-meta{
+    font-size:0.78rem;color:var(--ink-soft);display:flex;flex-direction:column;gap:2px;
+  }
+  .read-link{
+    font-weight:600;color:var(--gold-deep);font-size:0.88rem;
+    display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+  }
+  .read-link .arrow{transition:transform .2s ease;}
+  .log-entry:hover .read-link .arrow{transform:translateX(3px);}
+
+  @media (max-width:640px){
+    .log-entry{
+      grid-template-columns:40px 1fr;row-gap:12px;padding:24px 0;
+    }
+    .log-num{font-size:1.3rem;}
+    .log-side{
+      grid-column:2 / 3;text-align:left;align-items:flex-start;
+      flex-direction:row;justify-content:space-between;width:100%;
+    }
+  }
+
+  /* Author section */
+  .about-block{
+    display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:flex-start;
+    background:var(--card);border:1px solid var(--line);border-radius:20px;padding:34px;
+  }
+  .about-avatar{
+    width:76px;height:76px;border-radius:50%;background:var(--olive);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;
+    font-weight:600;font-size:1.5rem;flex:none;
+  }
+  .about-block h3{font-size:1.2rem;margin-bottom:6px;}
+  .about-block .role{color:var(--gold-deep);font-weight:600;font-size:0.85rem;margin-bottom:12px;display:block;}
+  .about-block p{color:var(--ink-soft);}
+
+  /* Newsletter / CTA strip */
+  .cta-strip{
+    background:var(--olive);border-radius:22px;padding:44px;color:#fff;
+    display:grid;grid-template-columns:1.3fr 0.7fr;gap:24px;align-items:center;
+  }
+  .cta-strip h2{color:#fff;font-size:1.5rem;}
+  .cta-strip p{color:#E4E9DE;margin-top:8px;}
+  .cta-strip .btn-primary{background:#fff;color:var(--olive);box-shadow:none;}
+  .cta-strip .btn-primary:hover{background:var(--oat);}
+
+  /* Footer */
+  footer.site{
+    background:var(--oat-deep);border-top:1px solid var(--line);padding:52px 0 26px;margin-top:20px;
+  }
+  .footer-grid{
+    display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;margin-bottom:36px;
+  }
+  .footer-grid h4{
+    font-family:'Work Sans',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.05em;
+    text-transform:uppercase;color:var(--ink-soft);margin-bottom:16px;
+  }
+  .footer-grid ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .footer-grid a{color:var(--ink);font-size:0.92rem;}
+  .footer-grid a:hover{color:var(--gold-deep);}
+  .footer-brand p{color:var(--ink-soft);font-size:0.92rem;max-width:34ch;margin-top:10px;}
+  .footer-contact p{margin:0 0 6px;font-size:0.9rem;color:var(--ink-soft);}
+  .footer-contact strong{color:var(--ink);}
+  .footer-statement{
+    border-top:1px solid var(--line);padding-top:22px;font-size:0.82rem;color:var(--ink-soft);
+    line-height:1.65;
+  }
+  .footer-bottom{
+    margin-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    font-size:0.78rem;color:var(--ink-soft);
+  }
+
+  /* Cookie banner */
+  #cookie-banner{
+    position:fixed;left:20px;right:20px;bottom:20px;max-width:520px;
+    background:var(--ink);color:#F1ECDD;border-radius:16px;padding:20px 22px;
+    box-shadow:0 20px 44px rgba(0,0,0,0.28);z-index:60;display:none;
+  }
+  #cookie-banner p{font-size:0.85rem;line-height:1.55;margin:0 0 14px;color:#DDE2D3;}
+  #cookie-banner .cookie-actions{display:flex;gap:10px;flex-wrap:wrap;}
+  #cookie-banner button{
+    border:0;border-radius:999px;padding:9px 18px;font-size:0.82rem;font-weight:600;cursor:pointer;
+  }
+  #cookie-accept{background:var(--gold);color:var(--ink);}
+  #cookie-manage{background:transparent;color:#F1ECDD;border:1px solid #566150;}
+
+  @media (max-width:920px){
+    .hero-grid{grid-template-columns:1fr;}
+    .grid-articles{grid-template-columns:repeat(2,1fr);}
+    .cta-strip{grid-template-columns:1fr;text-align:left;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:640px){
+    nav.main-nav{
+      position:fixed;top:66px;left:0;right:0;background:var(--oat);
+      border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;
+      padding:18px 24px 22px;gap:16px;display:none;
+    }
+    nav.main-nav.open{display:flex;}
+    .nav-toggle{display:block;}
+    .grid-articles{grid-template-columns:1fr;}
+    .about-block{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a href="index.html" class="logo">uninet <span>básico</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Inicio</a>
+      <a href="index.html#articulos">Artículos</a>
+      <a href="sobre-el-autor.html">Sobre el autor</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="index.html#articulos" class="cta-btn">Ver artículos</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Finanzas de la finca familiar</span>
+        <h1 class="hero-title">Organiza el dinero de tu finca <em>entre una cosecha y la siguiente</em></h1>
+        <p class="hero-sub">Contenido educativo pensado para pequeños productores: cómo planificar los gastos antes de la siembra, sostener el flujo de caja mientras llega la cosecha y ordenar los costos de producción durante todo el ciclo agrícola.</p>
+        <div class="hero-actions">
+          <a href="#articulos" class="btn-primary">Explorar artículos</a>
+          <a href="sobre-el-autor.html" class="btn-ghost">Sobre el autor</a>
+        </div>
+        <div class="author-chip">
+          <div class="author-avatar">VC</div>
+          <div class="author-meta">
+            <strong>Victor Hugo Cifuentes Velez</strong>
+            Autor y editor de contenidos educativos
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="false">
+        <div class="cap">
+          <h3>Ciclo financiero de la finca</h3>
+          <span>Ilustrativo</span>
+        </div>
+        <svg viewBox="0 0 420 220" width="100%" role="img" aria-label="Gráfico ilustrativo del ciclo de gastos antes de la cosecha y de ingresos después de la cosecha">
+          <line x1="20" y1="180" x2="400" y2="180" stroke="#DAD2B8" stroke-width="1.5"/>
+          <path d="M20,150 C90,175 120,205 170,178 C220,150 250,60 300,45 C340,35 370,50 400,55"
+                fill="none" stroke="#B8843C" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+          <path d="M20,150 C90,175 120,205 170,178 C220,150 250,60 300,45 C340,35 370,50 400,55 L400,180 L20,180 Z"
+                fill="#B8843C" opacity="0.08"/>
+          <path d="M20,150 C60,110 90,95 140,90 C190,85 230,150 280,165 C330,178 370,150 400,120"
+                fill="none" stroke="#48573C" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+          <circle cx="170" cy="178" r="4.5" fill="#B8843C"/>
+          <circle cx="300" cy="45" r="4.5" fill="#B8843C"/>
+          <circle cx="140" cy="90" r="4.5" fill="#48573C"/>
+          <circle cx="330" cy="178" r="4.5" fill="#48573C"/>
+          <text x="20" y="200" font-family="Work Sans, sans-serif" font-size="11" fill="#5B6350">Siembra</text>
+          <text x="290" y="200" font-family="Work Sans, sans-serif" font-size="11" fill="#5B6350">Cosecha</text>
+        </svg>
+        <div class="cycle-legend">
+          <div><span class="dot gasto"></span>Gastos concentrados antes de cosecha</div>
+          <div><span class="dot ingreso"></span>Ingresos concentrados después de cosecha</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="articulos">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Artículos</span>
+        <h2 class="section-title">Guías prácticas para el ciclo agrícola</h2>
+        <p>Contenido de carácter divulgativo sobre organización del presupuesto, priorización de partidas y control de costos, pensado para fincas familiares de 1 a 10 hectáreas.</p>
+      </div>
+
+      <div class="log">
+
+        <article class="log-entry">
+          <span class="log-num">01</span>
+          <div class="log-body">
+            <span class="badge">Presupuesto</span>
+            <h3>Cómo organizar el presupuesto de la finca antes de la siembra</h3>
+            <p class="desc">Una guía para listar y priorizar los gastos de insumos, mano de obra y mantenimiento antes de que arranque el ciclo productivo.</p>
+          </div>
+          <div class="log-side">
+            <div class="card-meta"><span>12 mar 2026</span><span>V. Cifuentes</span></div>
+            <a href="articulos/presupuesto-antes-de-la-siembra.html" class="read-link">Leer artículo <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+        <article class="log-entry">
+          <span class="log-num">02</span>
+          <div class="log-body">
+            <span class="badge">Flujo de caja</span>
+            <h3>Planificación de gastos entre cosechas: cómo evitar quedarse sin liquidez</h3>
+            <p class="desc">Ideas para distribuir el dinero disponible durante los meses en que hay más gastos que ingresos en la finca.</p>
+          </div>
+          <div class="log-side">
+            <div class="card-meta"><span>19 mar 2026</span><span>V. Cifuentes</span></div>
+            <a href="articulos/flujo-de-caja-entre-cosechas.html" class="read-link">Leer artículo <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+        <article class="log-entry">
+          <span class="log-num">03</span>
+          <div class="log-body">
+            <span class="badge">Costos</span>
+            <h3>Registro de costos de producción: qué anotar y por qué</h3>
+            <p class="desc">Qué datos conviene llevar por escrito de cada ciclo productivo para tomar mejores decisiones la próxima temporada.</p>
+          </div>
+          <div class="log-side">
+            <div class="card-meta"><span>27 mar 2026</span><span>V. Cifuentes</span></div>
+            <a href="articulos/registro-de-costos-de-produccion.html" class="read-link">Leer artículo <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+        <article class="log-entry">
+          <span class="log-num">04</span>
+          <div class="log-body">
+            <span class="badge">Ingresos</span>
+            <h3>Diversificación de ingresos en la pequeña finca familiar</h3>
+            <p class="desc">Cómo pensar en fuentes de ingreso complementarias dentro y fuera del ciclo de cosecha principal.</p>
+          </div>
+          <div class="log-side">
+            <div class="card-meta"><span>3 abr 2026</span><span>V. Cifuentes</span></div>
+            <a href="articulos/diversificacion-de-ingresos.html" class="read-link">Leer artículo <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+        <article class="log-entry">
+          <span class="log-num">05</span>
+          <div class="log-body">
+            <span class="badge">Planificación</span>
+            <h3>Cómo prepararse financieramente para la temporada de lluvias</h3>
+            <p class="desc">Gastos y riesgos a anticipar cuando la temporada de lluvias afecta la producción y el transporte.</p>
+          </div>
+          <div class="log-side">
+            <div class="card-meta"><span>10 abr 2026</span><span>V. Cifuentes</span></div>
+            <a href="articulos/preparacion-temporada-de-lluvias.html" class="read-link">Leer artículo <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+        <article class="log-entry">
+          <span class="log-num">06</span>
+          <div class="log-body">
+            <span class="badge">Organización</span>
+            <h3>Cómo distribuir los ingresos de cosecha durante el resto del año</h3>
+            <p class="desc">Un método simple para repartir el ingreso de la cosecha en partidas que cubran los meses siguientes.</p>
+          </div>
+          <div class="log-side">
+            <div class="card-meta"><span>17 abr 2026</span><span>V. Cifuentes</span></div>
+            <a href="articulos/distribucion-de-ingresos-de-cosecha.html" class="read-link">Leer artículo <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Sobre el autor</span>
+        <h2 class="section-title">Quién escribe en Uninet Básico</h2>
+      </div>
+      <div class="about-block">
+        <div class="about-avatar">VC</div>
+        <div>
+          <h3>Victor Hugo Cifuentes Velez</h3>
+          <span class="role">Autor y editor de contenidos educativos</span>
+          <p>Victor escribe en Uninet Básico sobre organización financiera aplicada a la producción rural, con un enfoque particular en la planificación de gastos e ingresos a lo largo del ciclo agrícola. Todo el contenido del sitio tiene fines educativos e informativos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="cta-strip">
+        <div>
+          <h2>Nuevos artículos cada semana</h2>
+          <p>Contenido educativo sobre organización financiera de la finca familiar, sin lenguaje de venta ni promesas de resultados.</p>
+        </div>
+        <a href="contacto.html" class="btn-primary">Ir a contacto</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">uninet <span>básico</span></a>
+        <p>Uninet Básico es un portal web independiente dedicado a la divulgación de contenidos educativos e informativos sobre finanzas para pequeños agricultores y producción rural. Todos los artículos son de carácter divulgativo.</p>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="legal/privacidad.html">Política de privacidad</a></li>
+          <li><a href="legal/terminos.html">Términos y condiciones</a></li>
+          <li><a href="legal/aviso-legal.html">Aviso legal</a></li>
+          <li><a href="legal/cookies.html">Política de cookies</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contacto</h4>
+        <p><strong>Victor Hugo Cifuentes Velez</strong></p>
+        <p>1, Santa Cruz de la Sierra, Bolivia</p>
+        <p>soporte@uninetbasico.blog</p>
+        <p>+591 2 2364728</p>
+      </div>
+    </div>
+    <div class="footer-statement">
+      Uninet Básico es un portal web independiente dedicado a la divulgación de contenidos educativos e informativos sobre finanzas para pequeños agricultores y producción rural. Todos los artículos son de carácter divulgativo.
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Uninet Básico. Todos los derechos reservados.</span>
+      <span>Victor Hugo Cifuentes Velez</span>
+    </div>
+  </div>
+</footer>
+
+<div id="cookie-banner" role="dialog" aria-label="Aviso de cookies">
+  <p>Usamos cookies propias y de terceros para mejorar tu experiencia de navegación y analizar el uso del sitio. Puedes aceptar, rechazar o ajustar tus preferencias en cualquier momento. Más información en nuestra <a href="legal/cookies.html" style="text-decoration:underline;color:#F1ECDD;">política de cookies</a>.</p>
+  <div class="cookie-actions">
+    <button id="cookie-accept">Aceptar</button>
+    <button id="cookie-manage">Configurar</button>
+  </div>
+</div>
+
+<script>
+  // Mobile nav toggle
+  var toggle = document.getElementById('navToggle');
+  var nav = document.getElementById('mainNav');
+  toggle.addEventListener('click', function(){
+    var isOpen = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Cookie banner (does not gate or hide any content, per compliance rules)
+  (function(){
+    var banner = document.getElementById('cookie-banner');
+    var accept = document.getElementById('cookie-accept');
+    var manage = document.getElementById('cookie-manage');
+    try {
+      if(!localStorage.getItem('ub_cookie_choice')){
+        banner.style.display = 'block';
+      }
+    } catch(e){ banner.style.display = 'block'; }
+
+    accept.addEventListener('click', function(){
+      try{ localStorage.setItem('ub_cookie_choice','accepted'); }catch(e){}
+      banner.style.display = 'none';
+    });
+    manage.addEventListener('click', function(){
+      window.location.href = 'legal/cookies.html';
+    });
+  })();
+</script>
+
+</body>
+</html>
